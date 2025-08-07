@@ -6,8 +6,6 @@ public abstract class LessonBase<TTestCase, TResult> : ILesson<TTestCase, TResul
     public abstract IEnumerable<(TTestCase TestCase, TResult ExpectedResult)> TestCases { get; }
     public abstract TResult Run(TTestCase testCase);
 
-    public string Name => GetType().Name;
-
     public void RunAllTests()
     {
         var testCases = TestCases.ToArray();
@@ -22,23 +20,24 @@ public abstract class LessonBase<TTestCase, TResult> : ILesson<TTestCase, TResul
                 var actual = Run(testCase);
                 var isSuccess = EqualityComparer<TResult>.Default.Equals(actual, expected);
 
-                LogResult(testCase, expected, actual, isSuccess);
+                LogResult(i + 1, testCase, expected, actual, isSuccess);
             }
             catch (Exception ex)
             {
-                LogError(testCase, expected, ex);
+                LogError(i + 1, testCase, expected, ex);
             }
         }
     }
 
     protected virtual void LogResult(
+        int testID,
         TTestCase testCase,
         TResult expected,
         TResult actual,
         bool isSuccess)
     {
         Console.ForegroundColor = isSuccess ? ConsoleColor.Green : ConsoleColor.Red;
-        Console.WriteLine($"Test #{Name} {(isSuccess ? "Successfull" : "Failed")}");
+        Console.WriteLine($"Test #{testID} {(isSuccess ? "Successfull" : "Failed")}");
         Console.ResetColor();
 
         Console.WriteLine($"Input: {testCase.ToJsonString()}");
@@ -52,12 +51,13 @@ public abstract class LessonBase<TTestCase, TResult> : ILesson<TTestCase, TResul
     }
 
     protected virtual void LogError(
+        int testID,
         TTestCase testCase,
         TResult expected,
         Exception ex)
     {
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine($"Test #{Name} Failed: {ex.Message}");
+        Console.WriteLine($"Test #{testID} Failed: {ex.Message}");
         Console.ResetColor();
 
         Console.WriteLine($"Input: {testCase.ToJsonString()}");
@@ -65,6 +65,4 @@ public abstract class LessonBase<TTestCase, TResult> : ILesson<TTestCase, TResul
         Console.WriteLine($"Error: {ex}");
         Console.WriteLine();
     }
-
-
 }

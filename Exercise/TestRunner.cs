@@ -22,6 +22,7 @@ public class TestRunner
 
             Console.WriteLine($"\nEnd: {lessonType.Name}");
             Console.WriteLine("-----------------------------------");
+            Console.WriteLine();
         }
     }
 }
