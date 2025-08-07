@@ -1,7 +1,8 @@
 ﻿namespace Exercise;
 public interface ILesson
 {
-    void RunAllTests();
+    void RunAllTestCases();
+    bool NeedToRunSingle { get; }
 }
 
 public interface ILesson<TTestCase, TResult> : ILesson

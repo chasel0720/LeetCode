@@ -2,5 +2,12 @@
 // https://leetcode.cn/problemset/
 
 using Exercise;
-new TestRunner().RunAllLessons();
+var testRunner = new TestRunner();
+
+// run all lessons
+//testRunner.RunAllLessons();
+//Console.ReadKey();
+
+/////run specific lesson only
+testRunner.RunSpecificLesson();
 Console.ReadKey();

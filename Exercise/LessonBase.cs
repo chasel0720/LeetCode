@@ -3,8 +3,9 @@ public abstract class LessonBase<TTestCase, TResult> : ILesson<TTestCase, TResul
 {
     public abstract IEnumerable<(TTestCase TestCase, TResult ExpectedResult)> TestCases { get; }
     public abstract TResult Run(TTestCase testCase);
+    public virtual bool NeedToRunSingle => false;
 
-    public void RunAllTests()
+    public void RunAllTestCases()
     {
         var testCases = TestCases.ToArray();
 

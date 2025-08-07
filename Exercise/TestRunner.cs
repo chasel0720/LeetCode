@@ -3,40 +3,40 @@ public class TestRunner
 {
     public void RunAllLessons()
     {
+        RunLessons(true);
+    }
+
+    public void RunSpecificLesson()
+    {
+        RunLessons(false);
+    }
+
+    void RunLessons(bool runAllOrNot)
+    {
         var assembly = typeof(TestRunner).Assembly;
-        var lessonTypes = assembly.GetTypes()
-            .Where(t => t.IsClass && !t.IsAbstract && typeof(ILesson).IsAssignableFrom(t))
+        var lessons = assembly.GetTypes()
+            .Where(t => t.IsClass
+            && !t.IsAbstract && typeof(ILesson).IsAssignableFrom(t)
+            )
+            .Select(t => (ILesson)Activator.CreateInstance(t)!)
+            .Where(l => l.NeedToRunSingle || runAllOrNot)
             .ToList();
 
-        Console.WriteLine($"Find {lessonTypes.Count} Lessons");
+        Console.WriteLine($"Find {lessons.Count} Lessons");
         Console.WriteLine("==================================");
 
-        foreach (var lessonType in lessonTypes)
+        foreach (var lesson in lessons)
         {
+            var name = lesson.GetType().Name;
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine($"\nRun: {lessonType.Name}");
+            Console.WriteLine($"\nRun: {name}");
             Console.ResetColor();
 
-            var lesson = (ILesson)Activator.CreateInstance(lessonType);
-            lesson.RunAllTests();
+            lesson.RunAllTestCases();
 
-            Console.WriteLine($"\nEnd: {lessonType.Name}");
+            Console.WriteLine($"\nEnd: {name}");
             Console.WriteLine("-----------------------------------");
             Console.WriteLine();
         }
-    }
-
-    public void RunSpecificLesson(Type t)
-    {
-        Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.WriteLine($"\nRun: {t.Name}");
-        Console.ResetColor();
-
-        var lesson = (ILesson)Activator.CreateInstance(t);
-        lesson.RunAllTests();
-
-        Console.WriteLine($"\nEnd: {t.Name}");
-        Console.WriteLine("-----------------------------------");
-        Console.WriteLine();
     }
 }
