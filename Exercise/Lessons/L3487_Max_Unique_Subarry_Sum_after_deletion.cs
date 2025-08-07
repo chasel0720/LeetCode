@@ -52,14 +52,26 @@ class L3487_Max_Unique_Subarry_Sum_after_deletion : LessonBase<int[], int>
     public override IEnumerable<(int[] TestCase, int ExpectedResult)> TestCases => [
         (new[] { 1, 2, 3, 4, 5 }, 15),
         (new[] { 1, 2, 2, 3, 4 }, 10),
-        (new[] { 1, 1, 1, 1 }, 1),
+        (new[] { -1, 0, 1,2 }, 3),
         (new[] { 5, 5, 5, 5 }, 5),
-        (new[] { -1, -2, -3 }, -6),
-        (new[] { -1, -2, -2, -3 }, -6)
+        (new[] { -1, -2, -3 }, -1),
+        (new[] { -1, -2, -2, -3 }, -1)
     ];
 
     public override int Run(int[] testCase)
     {
-        return testCase.Last();
+        HashSet<int> positiveNumsSet = new HashSet<int>();
+        foreach (int num in testCase)
+        {
+            if (num > 0)
+            {
+                positiveNumsSet.Add(num);
+            }
+        }
+        if (positiveNumsSet.Count == 0)
+        {
+            return testCase.Max();
+        }
+        return positiveNumsSet.Sum();
     }
 }
