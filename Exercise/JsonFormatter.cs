@@ -8,6 +8,8 @@ public static class JsonFormatter
     {
         if (value == null) return "null";
 
+        if (!value.GetType().IsClass) return $"\"{value}\"";
+
         var options = new JsonSerializerOptions
         {
             WriteIndented = false,

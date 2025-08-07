@@ -25,4 +25,18 @@ public class TestRunner
             Console.WriteLine();
         }
     }
+
+    public void RunSpecificLesson(Type t)
+    {
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine($"\nRun: {t.Name}");
+        Console.ResetColor();
+
+        var lesson = (ILesson)Activator.CreateInstance(t);
+        lesson.RunAllTests();
+
+        Console.WriteLine($"\nEnd: {t.Name}");
+        Console.WriteLine("-----------------------------------");
+        Console.WriteLine();
+    }
 }
