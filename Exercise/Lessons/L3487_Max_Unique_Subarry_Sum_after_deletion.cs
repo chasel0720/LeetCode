@@ -44,12 +44,12 @@
 1 <= nums.length <= 100
 -100 <= nums[i] <= 100
  */
+
 namespace Exercise;
 
-class L3487_Max_Unique_Subarry_Sum_after_deletion : ILesson<int[], int>
+class L3487_Max_Unique_Subarry_Sum_after_deletion : LessonBase<int[], int>
 {
-    public (int[] Case, int expectedResult)[] TestCases =>
-    [
+    public override IEnumerable<(int[] TestCase, int ExpectedResult)> TestCases => [
         (new[] { 1, 2, 3, 4, 5 }, 15),
         (new[] { 1, 2, 2, 3, 4 }, 10),
         (new[] { 1, 1, 1, 1 }, 1),
@@ -57,8 +57,9 @@ class L3487_Max_Unique_Subarry_Sum_after_deletion : ILesson<int[], int>
         (new[] { -1, -2, -3 }, -6),
         (new[] { -1, -2, -2, -3 }, -6)
     ];
-    public int Run(int[] args)
+
+    public override int Run(int[] testCase)
     {
-        var uniqueElements = new HashSet<int>();
+        return testCase.Last();
     }
 }

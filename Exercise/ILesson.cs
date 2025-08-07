@@ -1,6 +1,12 @@
 ﻿namespace Exercise;
-public interface ILesson<T,U>
+public interface ILesson
 {
-    (T Case, U expectedResult)[] TestCases { get; }
-    U Run (T args);
+    void RunAllTests();
+}
+
+public interface ILesson<TTestCase, TResult> : ILesson
+{
+    IEnumerable<(TTestCase TestCase, TResult ExpectedResult)> TestCases { get; }
+
+    TResult Run(TTestCase testCase);
 }
