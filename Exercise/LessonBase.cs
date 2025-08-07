@@ -3,7 +3,7 @@ public abstract class LessonBase<TTestCase, TResult> : ILesson<TTestCase, TResul
 {
     public abstract IEnumerable<(TTestCase TestCase, TResult ExpectedResult)> TestCases { get; }
     public abstract TResult Run(TTestCase testCase);
-    public virtual bool NeedToRunSingle => false;
+    public virtual bool NeedToRunSingle => true;
 
     public void RunAllTestCases()
     {

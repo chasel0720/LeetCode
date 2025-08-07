@@ -8,7 +8,7 @@ public class L1492_The_kth_Factor_of_n : LessonBase<(int n, int k), int>
             ((7,2),7),
             ((4,4),-1)
         ];
-
+    public override bool NeedToRunSingle => false;
     public override int Run((int n, int k) testCase)
     {
         return FindKthFactor(testCase.n, testCase.k);
