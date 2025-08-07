@@ -1,6 +1,4 @@
 ﻿namespace Exercise;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 public abstract class LessonBase<TTestCase, TResult> : ILesson<TTestCase, TResult>
 {
     public abstract IEnumerable<(TTestCase TestCase, TResult ExpectedResult)> TestCases { get; }
@@ -14,17 +12,20 @@ public abstract class LessonBase<TTestCase, TResult> : ILesson<TTestCase, TResul
         {
             var testCase = testCases[i].TestCase;
             var expected = testCases[i].ExpectedResult;
-
+            TimeSpan timeSpan = TimeSpan.Zero;
+            var startTime = DateTime.Now;
             try
             {
                 var actual = Run(testCase);
+                timeSpan = DateTime.Now - startTime;
                 var isSuccess = EqualityComparer<TResult>.Default.Equals(actual, expected);
 
-                LogResult(i + 1, testCase, expected, actual, isSuccess);
+                LogResult(i + 1, testCase, expected, actual, isSuccess, timeSpan);
             }
             catch (Exception ex)
             {
-                LogError(i + 1, testCase, expected, ex);
+                timeSpan = DateTime.Now - startTime;
+                LogError(i + 1, testCase, expected, ex, timeSpan);
             }
         }
     }
@@ -34,10 +35,11 @@ public abstract class LessonBase<TTestCase, TResult> : ILesson<TTestCase, TResul
         TTestCase testCase,
         TResult expected,
         TResult actual,
-        bool isSuccess)
+        bool isSuccess,
+        TimeSpan timeSpan)
     {
         Console.ForegroundColor = isSuccess ? ConsoleColor.Green : ConsoleColor.Red;
-        Console.WriteLine($"Test #{testID} {(isSuccess ? "Successfull" : "Failed")}");
+        Console.WriteLine($"Test #{testID} {(isSuccess ? "Successfull" : "Failed")}, TimeSpan: {timeSpan.TotalMilliseconds}mm");
         Console.ResetColor();
 
         Console.WriteLine($"Input: {testCase.ToJsonString()}");
@@ -54,15 +56,16 @@ public abstract class LessonBase<TTestCase, TResult> : ILesson<TTestCase, TResul
         int testID,
         TTestCase testCase,
         TResult expected,
-        Exception ex)
+        Exception ex,
+        TimeSpan timeSpan)
     {
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine($"Test #{testID} Failed: {ex.Message}");
+        Console.WriteLine($"Test #{testID} Failed, TimeSpan: {timeSpan.TotalMilliseconds}mm");
         Console.ResetColor();
 
         Console.WriteLine($"Input: {testCase.ToJsonString()}");
         Console.WriteLine($"Expected: {expected.ToJsonString()}");
-        Console.WriteLine($"Error: {ex}");
+        Console.WriteLine($"Error: {ex.ToJsonString()}");
         Console.WriteLine();
     }
 }

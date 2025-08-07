@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
+namespace Exercise;
 public static class JsonFormatter
 {
     public static string ToJsonString<T>(this T value)
