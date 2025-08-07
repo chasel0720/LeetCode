@@ -15,8 +15,6 @@ public class L13_roman_to_integer : LessonBase<string, int>
         ("CDXLIV",444)
     ];
 
-    public override bool NeedToRunSingle => true;
-
     public override int Run(string testCase)
     {
         char[] chars = testCase.ToCharArray();
