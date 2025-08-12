@@ -19,7 +19,7 @@ public class TestRunner
             && !t.IsAbstract && typeof(ILesson).IsAssignableFrom(t)
             )
             .Select(t => (ILesson)Activator.CreateInstance(t)!)
-            .Where(l => lessonType != null && l.GetType() == lessonType)
+            .Where(l => lessonType == null || l.GetType() == lessonType)
             .ToList();
 
         Console.WriteLine($"Find {lessons.Count} Lessons");

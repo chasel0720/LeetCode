@@ -13,7 +13,7 @@ public static class JsonFormatter
         {
             return SerializeTuple(value);
         }
-        if (!value.GetType().IsClass) return $"\"{value}\"";
+        if (!value.GetType().IsClass) return $"{value}";
 
         var options = new JsonSerializerOptions
         {
