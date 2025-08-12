@@ -8,7 +8,6 @@ public class L14_longest_common_prefix : LessonBase<string[], string>
         (["flower","flow","flight"],"fl"),
         (["dog","racecar","car"],"")
     ];
-    // public override bool NeedToRunSingle => false;
 
     public override string Run(string[] strs)
     {

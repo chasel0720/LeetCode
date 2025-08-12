@@ -3,15 +3,15 @@ public class TestRunner
 {
     public void RunAllLessons()
     {
-        RunLessons(true);
+        RunLessons();
     }
 
-    public void RunSpecificLesson()
+    public void RunSpecificLesson(Type lesson)
     {
-        RunLessons(false);
+        RunLessons(lesson);
     }
 
-    void RunLessons(bool runAllOrNot)
+    void RunLessons(Type lessonType = null)
     {
         var assembly = typeof(TestRunner).Assembly;
         var lessons = assembly.GetTypes()
@@ -19,7 +19,7 @@ public class TestRunner
             && !t.IsAbstract && typeof(ILesson).IsAssignableFrom(t)
             )
             .Select(t => (ILesson)Activator.CreateInstance(t)!)
-            .Where(l => l.NeedToRunSingle || runAllOrNot)
+            .Where(l => lessonType != null && l.GetType() == lessonType)
             .ToList();
 
         Console.WriteLine($"Find {lessons.Count} Lessons");

@@ -2,7 +2,6 @@
 public interface ILesson
 {
     void RunAllTestCases();
-    bool NeedToRunSingle { get; }
 }
 
 public interface ILesson<TTestCase, TResult> : ILesson

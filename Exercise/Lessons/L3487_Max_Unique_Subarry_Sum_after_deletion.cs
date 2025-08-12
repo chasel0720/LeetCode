@@ -11,7 +11,6 @@ class L3487_Max_Unique_Subarry_Sum_after_deletion : LessonBase<int[], int>
         (new[] { -1, -2, -3 }, -1),
         (new[] { -1, -2, -2, -3 }, -1)
     ];
-    public override bool NeedToRunSingle => false;
     public override int Run(int[] testCase)
     {
         HashSet<int> positiveNumsSet = new HashSet<int>();

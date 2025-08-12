@@ -2,7 +2,6 @@
 namespace Exercise;
 public class L9_palindrome_number : LessonBase<int, bool>
 {
-    public override bool NeedToRunSingle => false;
     public override IEnumerable<(int TestCase, bool ExpectedResult)> TestCases =>
     [
         (121,true),

@@ -9,5 +9,5 @@ var testRunner = new TestRunner();
 //Console.ReadKey();
 
 /////run specific lesson only
-testRunner.RunSpecificLesson();
+testRunner.RunSpecificLesson(typeof(L88_merge_sorted_array));
 Console.ReadKey();
