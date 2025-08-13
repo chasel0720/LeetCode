@@ -9,5 +9,5 @@ var testRunner = new TestRunner();
 //Console.ReadKey();
 
 /////run specific lesson only
-testRunner.RunSpecificLesson(typeof(L80_remove_duplicates_from_sorted_array_ii));
+testRunner.RunSpecificLesson(typeof(L169_majority_element));
 Console.ReadKey();
