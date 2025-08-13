@@ -11,10 +11,15 @@ public static class JsonFormatter
         if (value == null) return "null";
         if (value.GetType().IsValueType)
         {
-            return SerializeTuple(value);
+            if (value.GetType().GetFields().Any(x => !x.IsStatic))
+            {
+                return SerializeTuple(value);
+            }
+            else
+            {
+                return $"{value}";
+            }
         }
-        if (!value.GetType().IsClass) return $"{value}";
-
         var options = new JsonSerializerOptions
         {
             WriteIndented = false,
@@ -49,7 +54,7 @@ public static class JsonFormatter
         return value switch
         {
             Array array => FormatArray(array),
-            ITuple tuple => SerializeTuple(tuple),
+            ITuple tuple => tuple.ToJsonString(),
             _ => value.ToString()
         };
     }
