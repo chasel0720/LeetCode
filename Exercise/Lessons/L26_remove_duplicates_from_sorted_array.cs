@@ -22,7 +22,7 @@ public class L26_remove_duplicates_from_sorted_array : LessonBase<int[], int>
         int j = 1;
         while (j < nums.Length)
         {
-            if (nums[j] != nums[j - 1])
+            if (nums[j] != nums[i - 1])
             {
                 nums[i] = nums[j];
                 i++;
