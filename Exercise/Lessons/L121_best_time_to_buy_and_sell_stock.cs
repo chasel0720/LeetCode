@@ -6,12 +6,12 @@ public class L121_best_time_to_buy_and_sell_stock : LessonBase<int[], int>
 {
     public override IEnumerable<(int[] TestCase, int ExpectedResult)> TestCases =>
         [
-            //([7,1,5,3,6,4], 5),
-            //([7,3,5,1,6,4], 5),
-            //([7,6,4,3,1], 0),
+            ([7,1,5,3,6,4], 5),
+            ([7,3,5,1,6,4], 5),
+            ([7,6,4,3,1], 0),
             ([3,2,6,5,0,3],4),
-            //([1,2],1),
-            //([1,4,3],3)
+            ([1,2],1),
+            ([1,4,3],3)
         ];
 
     public override int Run(int[] testCase)
