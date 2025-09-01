@@ -9,5 +9,5 @@ var testRunner = new TestRunner();
 //Console.ReadKey();
 
 /////run specific lesson only
-testRunner.RunSpecificLesson(typeof(L55_jump_game));
+testRunner.RunSpecificLesson(typeof(L274_h_index));
 Console.ReadKey();
