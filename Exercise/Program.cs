@@ -9,5 +9,5 @@ var testRunner = new TestRunner();
 //Console.ReadKey();
 
 /////run specific lesson only
-testRunner.RunSpecificLesson(typeof(L274_h_index));
+testRunner.RunSpecificLesson(typeof(L238_product_of_array_except_self));
 Console.ReadKey();
