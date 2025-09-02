@@ -11,14 +11,15 @@ public class TestRunner
         RunLessons(lesson);
     }
 
-    void RunLessons(Type lessonType = null)
+    void RunLessons(Type? lessonType = null)
     {
         var assembly = typeof(TestRunner).Assembly;
         var lessons = assembly.GetTypes()
             .Where(t => t.IsClass
-            && !t.IsAbstract && typeof(ILesson).IsAssignableFrom(t)
+            && !t.IsAbstract
+            && t.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ILesson<,>))
             )
-            .Select(t => (ILesson)Activator.CreateInstance(t)!)
+            .Select(t => Activator.CreateInstance(t)!)
             .Where(l => lessonType == null || l.GetType() == lessonType)
             .ToList();
 
@@ -32,7 +33,11 @@ public class TestRunner
             Console.WriteLine($"\nRun: {name}");
             Console.ResetColor();
 
-            lesson.RunAllTestCases();
+            var runMethod = lesson.GetType().GetMethod("RunAllTestCases");
+            if (runMethod != null)
+            {
+                runMethod.Invoke(lesson, null);
+            }
 
             Console.WriteLine($"\nEnd: {name}");
             Console.WriteLine("-----------------------------------");
