@@ -11,7 +11,7 @@ public class TestRunner
         RunLessons(lesson);
     }
 
-    void RunLessons(Type? lessonType = null)
+    static void RunLessons(Type? lessonType = null)
     {
         var assembly = typeof(TestRunner).Assembly;
         var lessons = assembly.GetTypes()

@@ -1,6 +1,5 @@
 ﻿// https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/?envType=study-plan-v2&envId=top-interview-150
 
-
 namespace Exercise;
 public class L121_best_time_to_buy_and_sell_stock : LessonBase<int[], int>
 {
