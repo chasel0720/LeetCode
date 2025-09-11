@@ -9,5 +9,5 @@ var testRunner = new TestRunner();
 //Console.ReadKey();
 
 /////run specific lesson only
-testRunner.RunSpecificLesson(typeof(L134_gas_station));
+testRunner.RunSpecificLesson(typeof(L125_valid_palindrome));
 Console.ReadKey();
