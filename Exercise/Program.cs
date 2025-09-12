@@ -2,6 +2,7 @@
 // https://leetcode.cn/problemset/
 
 using Exercise;
+using Exercise.Lessons;
 var testRunner = new TestRunner();
 
 // run all lessons
@@ -9,5 +10,5 @@ var testRunner = new TestRunner();
 //Console.ReadKey();
 
 /////run specific lesson only
-testRunner.RunSpecificLesson(typeof(L125_valid_palindrome));
+testRunner.RunSpecificLesson(typeof(L392_is_subsequence));
 Console.ReadKey();

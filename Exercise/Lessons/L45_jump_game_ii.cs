@@ -1,8 +1,7 @@
 ﻿//https://leetcode.cn/problems/jump-game-ii/?envType=study-plan-v2&envId=top-interview-150
 
-
-
 namespace Exercise;
+
 public class L45_jump_game_ii : LessonBase<int[], int>
 {
     public override IEnumerable<(int[] TestCase, int ExpectedResult)> TestCases => [
